@@ -1,4 +1,4 @@
-package com.example.bmi;
+package com.example.fido;
 
 import org.junit.Test;
 
