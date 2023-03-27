@@ -1,20 +1,32 @@
 package com.example.fido;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
 import android.content.Context;
+import android.database.Observable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fido.FingerPrint.BiometricHelper;
+import com.example.fido.fidoapi.ConnAPI;
 import com.google.android.material.snackbar.Snackbar;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView fingerprint_img;
-//    private BiometricHelper helper;
-
     private Context context;
+
+    private ConnAPI connAPI;
 
 
     @Override
@@ -27,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initData();
         setListeners();
+        connAPI = new ConnAPI();
+
     }
 
     private void initViews()
@@ -39,11 +53,9 @@ public class MainActivity extends AppCompatActivity {
     {
     }
 
-    private void setListeners()
-    {
+    private void setListeners() {
         fingerprint_img.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 ImageView t_v = (ImageView)v;
 
@@ -51,12 +63,24 @@ public class MainActivity extends AppCompatActivity {
                     context = MainActivity.this;
                     BiometricHelper helper = new BiometricHelper(context);
 
-//                    Toast.makeText(context, "Image clicked!", Toast.LENGTH_SHORT).show();
                     Snackbar.make(t_v, "Image clicked!", Snackbar.LENGTH_SHORT).show();
-                    helper.authenticate();
-
+                    boolean callAPI = helper.authenticate();
+                    if(callAPI){
+                        ConnAPI connAPI = new ConnAPI();
+                        EditText editTextName = (EditText)findViewById(R.id.editTextName);
+                        EditText editTextdisplayName = (EditText)findViewById(R.id.editTextdisplayName);
+                        String Name = editTextName.getText().toString();
+                        String displayName = editTextdisplayName.getText().toString();
+                        String result = "";
+                        try {
+                            result = connAPI.start(Name,displayName);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
             }
         });
     }
+
 }

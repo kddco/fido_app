@@ -13,8 +13,6 @@ import com.example.fido.R;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.concurrent.Executor;
 
-import com.example.fido.fidoapi.*;
-
 public class BiometricHelper extends FragmentActivity{
     private Context context;
     private Executor executor;
@@ -29,7 +27,7 @@ public class BiometricHelper extends FragmentActivity{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void authenticate(){
+    public boolean authenticate(){
         BiometricManager biometricManager = BiometricManager.from(context);
         int result = biometricManager.canAuthenticate();
         View view = ((Activity) context).findViewById(R.id.imageView);
@@ -45,14 +43,19 @@ public class BiometricHelper extends FragmentActivity{
                     .build();
             biometricPrompt.authenticate(promptInfo);
             Snackbar.make(view, "PASS", Snackbar.LENGTH_LONG).show();
+            return true;
 
 
         } else if (result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
             Snackbar.make(view, "硬體不支援", Snackbar.LENGTH_LONG).show();
+            return false;
         } else if (result == BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE) {
             Snackbar.make(view, "硬體不可用", Snackbar.LENGTH_LONG).show();
+            return false;
         } else if (result == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
             Snackbar.make(view, "沒有任何註冊指紋", Snackbar.LENGTH_LONG).show();
+            return false;
         }
+    return false;
     }
 }

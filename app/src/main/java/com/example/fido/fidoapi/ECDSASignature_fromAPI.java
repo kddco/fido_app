@@ -18,6 +18,8 @@ public class ECDSASignature_fromAPI {
 
     public String publicKeyHex="";
     public String privateKeyHex="";
+
+    private String IP="10.0.2.2";
     public String Hash(String challenge) throws IOException {
 
         // 使用GSON建立JSON物件
@@ -28,7 +30,7 @@ public class ECDSASignature_fromAPI {
 
 
         // 建立 HTTP 連線
-        URL url = new URL("http://127.0.0.1:6677/hash");
+        URL url = new URL("http://"+ IP +":6677/hash");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
@@ -77,7 +79,7 @@ public class ECDSASignature_fromAPI {
         this.challenge = challenge;
     }
     public void getkeypairhex() throws Exception {
-        String apiUrl = "http://127.0.0.1:6677/getkeypairhex";
+        String apiUrl = "http://"+IP+":6677/getkeypairhex";
         URL url = new URL(apiUrl);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -116,7 +118,7 @@ public class ECDSASignature_fromAPI {
         String json = gson.toJson(jsonObject);
 
         //create connection
-        String apiUrl = "http://127.0.0.1:6677/sign";
+        String apiUrl = "http://"+ IP +":6677/sign";
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");

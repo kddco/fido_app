@@ -18,18 +18,22 @@ public class preregister {
     String displayName = "user1";
 
     String session="";
+
+    private String IP="10.0.2.2";
     public static void main(String[] args) throws Exception {
         //最終拿到challenge
-        preregister test = new preregister();
-        test.sendRequest();
-        System.out.println(test.getChallenge());
-        String pre_session = test.getSession();
+//        preregister test = new preregister();
+//        test.sendRequest();
+//        System.out.println(test.getChallenge());
+//        String pre_session = test.getSession();
     }
-    public preregister(){
+    public preregister(String name,String displayName){
+        this.name=name;
+        this.displayName=displayName;
 
     }
-    public preregister(String challenge,String reqid,String type,String app,String name,String displayName ){
-        this.challenge=challenge;
+    public preregister(String reqid,String type,String app,String name,String displayName ){
+
         this.reqid=reqid;
         this.type=type;
         this.app=app;
@@ -45,32 +49,42 @@ public class preregister {
     }
     public void sendRequest() throws IOException {
 
-        // 要發送的JSON數據
+        JsonObject jsonObject = new JsonObject();
 
-        String json = "{\n" +
-                "    \"rp\": {\n" +
-                "        \"reqid\": \"" + reqid + "\",\n" +
-                "        \"type\": \"" + type + "\",\n" +
-                "        \"app\": \"" + app + "\"\n" +
-                "    },\n" +
-                "    \"user\": {\n" +
-                "        \"name\": \"" + name + "\",\n" +
-                "        \"displayName\": \"" + displayName + "\"\n" +
-                "    },\n" +
-                "    \"pubKeyCredParams\": {\n" +
-                "        \"type\": \"public-key\",\n" +
-                "        \"alg\": -7\n" +
-                "    },\n" +
-                "    \"timeout\": 60000,\n" +
-                "    \"attestation\": \"direct\",\n" +
-                "    \"authenticatorSelection\": {\n" +
-                "        \"authenticatorAttachment\": \"platform\",\n" +
-                "        \"userVerification\": \"preferred\"\n" +
-                "    }\n" +
-                "}";
+// 构建 rp 对象
+        JsonObject rpObject = new JsonObject();
+        rpObject.addProperty("reqid", reqid);
+        rpObject.addProperty("type", type);
+        rpObject.addProperty("app", app);
+        jsonObject.add("rp", rpObject);
 
+// 构建 user 对象
+        JsonObject userObject = new JsonObject();
+        userObject.addProperty("name", name);
+        userObject.addProperty("displayName", displayName);
+        jsonObject.add("user", userObject);
+
+// 构建 pubKeyCredParams 对象
+        JsonObject pubKeyCredParamsObject = new JsonObject();
+        pubKeyCredParamsObject.addProperty("type", "public-key");
+        pubKeyCredParamsObject.addProperty("alg", -7);
+        jsonObject.add("pubKeyCredParams", pubKeyCredParamsObject);
+
+// 填充其他属性
+        jsonObject.addProperty("timeout", 60000);
+        jsonObject.addProperty("attestation", "direct");
+
+// 构建 authenticatorSelection 对象
+        JsonObject authenticatorSelectionObject = new JsonObject();
+        authenticatorSelectionObject.addProperty("authenticatorAttachment", "platform");
+        authenticatorSelectionObject.addProperty("userVerification", "preferred");
+        jsonObject.add("authenticatorSelection", authenticatorSelectionObject);
+
+// 输出 JSON 字符串
+        String json = new Gson().toJson(jsonObject);
         // 建立URL對象
-        URL url = new URL("http://127.0.0.1:6677/preregister");
+
+        URL url = new URL("http://"+ IP +":6677/preregister");
 
         // 建立HttpURLConnection對象
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -103,8 +117,8 @@ public class preregister {
         // 印出challenge
 
         Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
-        String challenge = jsonObject.get("challenge").getAsString();
+        JsonObject jsonObject2 = gson.fromJson(response, JsonObject.class);
+        String challenge = jsonObject2.get("challenge").getAsString();
 //        System.out.println("challenge" + challenge);
 
         this.challenge=challenge;

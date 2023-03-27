@@ -24,6 +24,8 @@ public class register {
     String hashedChallengeHex="";
     String hashedSignedMSGHex ="";
     String publicKeyHex ="";
+
+    private String IP="10.0.2.2";
     public static void main(String[] args) throws Exception {
         register test = new register();
         test.sendRequest();
@@ -31,6 +33,12 @@ public class register {
 
     }
     public register(){
+
+
+    }
+    public register(String name,String displayName){
+        this.name=name;
+        this.displayName=displayName;
 
     }
     public register(String challenge,String reqid,String type,String app,String name,String displayName ){
@@ -114,7 +122,8 @@ public class register {
         String json = gson.toJson(jsonObject);
 //        System.out.println(json);
 
-        URL url = new URL("http://127.0.0.1:6677/register");
+        URL url = new URL("http://"+ IP +":6677/register");
+
 
         // 建立HttpURLConnection對象
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
