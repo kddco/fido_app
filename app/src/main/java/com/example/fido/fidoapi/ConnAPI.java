@@ -76,7 +76,7 @@ public class ConnAPI {
         hashedSignedMSGHex = ecdsa.signhashMessage();
 
         // 注册 設定 session, hashedChallengeHex, hashedSignedMSGHex, pubkey, 傳送 hashed, hashedsigned, pubkey
-        register RegistrationManager = new register();
+        register RegistrationManager = new register(name,displayName);
         RegistrationManager.setSession(pre_session);
         RegistrationManager.sethashedChallengeHex(hashedChallengeHex);
         RegistrationManager.sethashedSignedMSGHex(hashedSignedMSGHex);

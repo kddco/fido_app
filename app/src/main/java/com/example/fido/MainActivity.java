@@ -78,13 +78,14 @@ public class MainActivity extends AppCompatActivity implements BiometricHelper.B
                     @Override
                     public void onSuccess(String result) {
                         TextView resultText = findViewById(R.id.resultText);
-                        resultText.setText(result);
+                        resultText.setText("驗證成功");
                         Snackbar.make(resultText, "PASS", Snackbar.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
     }

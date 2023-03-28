@@ -72,20 +72,15 @@
 
     <TextView
         android:id="@+id/resultText"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="46dp"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="驗證結果："
-        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextdisplayName"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.41" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
