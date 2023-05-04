@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements BiometricHelper.BiometricCallback {
+public class RegisterActivity extends AppCompatActivity implements BiometricHelper.BiometricCallback {
 
     private ImageView fingerprint_img;
     private Context context;
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements BiometricHelper.B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        context = MainActivity.this;
+        setContentView(R.layout.activity_register);
+        context = RegisterActivity.this;
         initViews();
         setListeners();
     }
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BiometricHelper.B
                 ImageView t_v = (ImageView) v;
                 if (t_v == fingerprint_img) {
                     BiometricHelper helper = new BiometricHelper(context);
-                    helper.authenticate(MainActivity.this);
+                    helper.authenticate(RegisterActivity.this);
                 }
             }
         });
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements BiometricHelper.B
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements BiometricHelper.B
 
     @Override
     public void onBiometricAuthenticationError(int errorCode, CharSequence errString) {
-        Toast.makeText(MainActivity.this, "Error: " + errString, Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegisterActivity.this, "Error: " + errString, Toast.LENGTH_SHORT).show();
     }
 }
 
