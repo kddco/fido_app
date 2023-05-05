@@ -43,7 +43,7 @@
         android:layout_marginEnd="105dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="name"
+        android:hint="ID"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,22 +81,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextdisplayName"
         app:layout_constraintVertical_bias="0.41" />
-
-    <TextView
-        android:id="@+id/textToken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="175dp"
-        android:layout_marginBottom="25dp"
-        android:text="Token：　"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultText"
-        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

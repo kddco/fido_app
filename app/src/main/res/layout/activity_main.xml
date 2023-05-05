@@ -1,25 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Space
+        android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.FIDO.AppBarOverlay">
+        android:layout_height="16dp"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        app:layout_constraintBottom_toTopOf="@id/button2" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.FIDO.PopupOverlay" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        app:layout_constraintTop_toBottomOf="@id/space"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.5" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_main2" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
