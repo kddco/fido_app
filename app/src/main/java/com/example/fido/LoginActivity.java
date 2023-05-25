@@ -20,8 +20,8 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-
-public class RegisterActivity extends AppCompatActivity implements BiometricHelper.BiometricCallback {
+// 串login API
+public class LoginActivity extends AppCompatActivity implements BiometricHelper.BiometricCallback {
 
     private ImageView fingerprint_img;
     private Context context;
@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements BiometricHelp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        context = RegisterActivity.this;
+        context = LoginActivity.this;
         initViews();
         setListeners();
     }
@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements BiometricHelp
                 ImageView t_v = (ImageView) v;
                 if (t_v == fingerprint_img) {
                     BiometricHelper helper = new BiometricHelper(context);
-                    helper.authenticate(RegisterActivity.this);
+                    helper.authenticate(LoginActivity.this);
                 }
             }
         });
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements BiometricHelp
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(RegisterActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements BiometricHelp
 
     @Override
     public void onBiometricAuthenticationError(int errorCode, CharSequence errString) {
-        Toast.makeText(RegisterActivity.this, "Error: " + errString, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "Error: " + errString, Toast.LENGTH_SHORT).show();
         TextView resultText = findViewById(R.id.resultText);
         resultText.setText("驗證失敗");
         resultText.setTextColor(Color.RED);

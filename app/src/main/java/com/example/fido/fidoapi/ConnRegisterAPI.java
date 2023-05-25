@@ -1,8 +1,6 @@
 package com.example.fido.fidoapi;
 
-import io.reactivex.rxjava3.core.Single;
-
-public class ConnAPI {
+public class ConnRegisterAPI {
     public static void main(String input_name, String input_displayName) throws Exception {
         //初始化變數
         String name = input_name;

@@ -42,4 +42,19 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintVertical_bias="0.5" />
 
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="93dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:srcCompat="@drawable/bluetooth__3_" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
