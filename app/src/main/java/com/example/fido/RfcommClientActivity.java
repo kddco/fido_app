@@ -1,6 +1,7 @@
 package com.example.fido;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
@@ -84,6 +85,17 @@ public class RfcommClientActivity extends AppCompatActivity implements AdapterVi
 
     private void connectToServer() {
         if (selectedDevice != null) {
+            // 存储蓝牙地址到SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("btServer", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("ServerAddress", selectedDevice.getAddress());
+            editor.apply();
+
+            //從SharedPreferences取出藍芽地址
+            SharedPreferences sharedPreferences2 = getSharedPreferences("btServer", MODE_PRIVATE);
+            String serverAddress = sharedPreferences2.getString("ServerAddress", "");
+            Log.d("SharedPreferences",serverAddress);
+
             if (ActivityCompat.checkSelfPermission(RfcommClientActivity.this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED ||
                     ActivityCompat.checkSelfPermission(RfcommClientActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
