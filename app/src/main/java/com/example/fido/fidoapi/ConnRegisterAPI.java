@@ -1,4 +1,7 @@
 package com.example.fido.fidoapi;
+import static com.example.fido.CRUD.WriteReadFile.*;
+import com.example.fido.CRUD.WriteReadFile.*;
+
 
 public class ConnRegisterAPI {
     public static void main(String input_name, String input_displayName) throws Exception {
@@ -25,6 +28,12 @@ public class ConnRegisterAPI {
         ecdsa.setChallenge(preReg_challenge);
         ecdsa.getkeypairhex();
         privateKeyHex = ecdsa.privateKeyHex;
+        storePrivateKey(privateKeyHex);
+        readPrivateKey();
+
+
+
+
         publicKeyHex = ecdsa.publicKeyHex;
         hashedChallengeHex = ecdsa.getHashChallengeHex();
         hashedSignedMSGHex = ecdsa.signhashMessage();
@@ -46,6 +55,8 @@ public class ConnRegisterAPI {
 
 
     }
+
+
 
     public String start(String input_name, String input_displayName) throws Exception {
         // 初始化变量
@@ -69,6 +80,9 @@ public class ConnRegisterAPI {
         ecdsa.setChallenge(preReg_challenge);
         ecdsa.getkeypairhex();
         privateKeyHex = ecdsa.privateKeyHex;
+        storePrivateKey(privateKeyHex);
+        String FromFilePrivateKey = readPrivateKey();
+
         publicKeyHex = ecdsa.publicKeyHex;
         hashedChallengeHex = ecdsa.getHashChallengeHex();
         hashedSignedMSGHex = ecdsa.signhashMessage();

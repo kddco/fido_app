@@ -1,5 +1,4 @@
 package com.example.fido;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +9,8 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.widget.ImageButton;
 
+import static com.example.fido.CRUD.WriteReadFile.setAppContext;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button REGbutton;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setAppContext(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
