@@ -1,4 +1,6 @@
 package com.example.fido.fidoapi;
+import static com.example.fido.CRUD.WriteReadFile.setAppContext;
+import android.content.Context;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +8,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+
+import com.example.fido.CRUD.connectinfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -19,7 +23,8 @@ public class preregister {
 
     String session="";
 
-    private String IP="10.0.2.2";
+    private String IP = connectinfo.ipAddress;
+
     public static void main(String[] args) throws Exception {
         //最終拿到challenge
 //        preregister test = new preregister();

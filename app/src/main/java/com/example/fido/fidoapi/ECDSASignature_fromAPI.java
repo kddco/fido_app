@@ -1,5 +1,8 @@
 package com.example.fido.fidoapi;
 
+import android.content.Context;
+
+import com.example.fido.CRUD.connectinfo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -19,7 +22,8 @@ public class ECDSASignature_fromAPI {
     public String publicKeyHex="";
     public String privateKeyHex="";
 
-    private String IP="10.0.2.2";
+    private String IP = connectinfo.ipAddress;
+
     public String Hash(String challenge) throws IOException {
 
         // 使用GSON建立JSON物件
