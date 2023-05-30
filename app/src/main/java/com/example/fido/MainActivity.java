@@ -10,7 +10,7 @@ import android.animation.AnimatorSet;
 import android.widget.ImageButton;
 
 import static com.example.fido.CRUD.WriteReadFile.setAppContext;
-
+import static com.example.fido.fidoapi.ConnLoginAPI.setAppContext_ConnLoginAPi;
 public class MainActivity extends AppCompatActivity {
 
     private Button REGbutton;
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setAppContext(getApplicationContext());
+        setAppContext_ConnLoginAPi(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

@@ -1,16 +1,19 @@
 package com.example.fido;
 
+import static com.example.fido.CRUD.connectinfo.gobal_selectedDevice;
+
 import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
 
 import java.io.OutputStream;
 import java.lang.reflect.Method;
@@ -107,13 +112,18 @@ public class RfcommClientActivity extends AppCompatActivity implements AdapterVi
                     @Override
                     public void run() {
                         try {
+                            BluetoothDevice selectedDevice = gobal_selectedDevice;
                             Method m = selectedDevice.getClass().getMethod("createRfcommSocket", new Class[]{int.class});
                             socket = (BluetoothSocket) m.invoke(selectedDevice, 1);
                             socket.connect();
 
                             OutputStream outputStream = socket.getOutputStream();
                             outputStream.write("hello".getBytes());
+                            outputStream.flush();
+                            Thread.sleep(1000);
+                            socket.close();
                             Log.d("MyTag", "SEND HELLO TO SERVER");
+
                         } catch (Exception e) {
                             e.printStackTrace();
                             runOnUiThread(new Runnable() {
@@ -136,6 +146,9 @@ public class RfcommClientActivity extends AppCompatActivity implements AdapterVi
         String deviceName = (String) parent.getItemAtPosition(position);
         Log.d("MyTag", "Selected Device Name: " + deviceName);
         selectedDevice = findDeviceByName(deviceName);
+        gobal_selectedDevice = selectedDevice;
+
+
 
         Toast.makeText(this, "Selected Device: " + deviceName, Toast.LENGTH_SHORT).show();
     }

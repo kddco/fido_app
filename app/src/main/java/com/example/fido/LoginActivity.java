@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fido.FingerPrint.BiometricHelper;
+import com.example.fido.fidoapi.ConnLoginAPI;
 import com.example.fido.fidoapi.ConnRegisterAPI;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -59,10 +60,10 @@ public class LoginActivity extends AppCompatActivity implements BiometricHelper.
         String Name = editTextName.getText().toString();
         String displayName = editTextdisplayName.getText().toString();
         Single.fromCallable(() -> {
-                    ConnRegisterAPI connRegisterAPI = new ConnRegisterAPI();
+                    ConnLoginAPI ConnLoginAPI = new ConnLoginAPI();
                     String result = "";
                     try {
-                        result = connRegisterAPI.start(Name, displayName);
+                        result = ConnLoginAPI.start(Name, displayName);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
